@@ -76,3 +76,50 @@ def create_spend_chart(categories):
             chart += "\n"
 
     return chart
+    # ... (Keep your Category class code exactly the same above here) ...
+
+if __name__ == "__main__":
+    print("--- Python Budget App ---")
+    
+    # 1. Get the category name from the user
+    cat_name = input("Enter the name of the category to create (e.g., Food): ")
+    user_category = Category(cat_name)
+    print(f"Created new budget category: {cat_name}\n")
+
+    # 2. Start an infinite loop so the program keeps running until you quit
+    while True:
+        print(f"What would you like to do with {cat_name}?")
+        print("1. Deposit Money")
+        print("2. Withdraw Money")
+        print("3. Check Balance/Receipt")
+        print("4. Quit")
+        
+        choice = input("Enter choice (1-4): ")
+
+        if choice == '1':
+            # Deposit Logic
+            amount = float(input("Enter amount to deposit: "))
+            description = input("Enter description (optional): ")
+            user_category.deposit(amount, description)
+            print("Deposit successful!\n")
+
+        elif choice == '2':
+            # Withdraw Logic
+            amount = float(input("Enter amount to withdraw: "))
+            description = input("Enter description: ")
+            if user_category.withdraw(amount, description):
+                print("Withdrawal successful!\n")
+            else:
+                print("Funds insufficient for withdrawal.\n")
+
+        elif choice == '3':
+            # Print the receipt (calls your __str__ method)
+            print(user_category)
+            print("\n")
+
+        elif choice == '4':
+            print("Exiting app. Goodbye!")
+            break  # This stops the loop
+
+        else:
+            print("Invalid choice, please try again.\n")
